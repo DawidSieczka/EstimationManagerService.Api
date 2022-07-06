@@ -1,17 +1,18 @@
-using EstimationManagerService.Infrastructure;
-using Microsoft.EntityFrameworkCore;
+using EstimationManagerService.Api.Extensions;
+using EstimationManagerService.Application.Operations.UserTasks.Queries.GetUserTasks;
+using MediatR;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
+var config = builder.Configuration;
 
 builder.Services.AddControllers();
 builder.Services.AddRouting(options => options.LowercaseUrls = true);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-var config = builder.Configuration;
-builder.Services.AddDbContext<AppDbContext>(b => b
-            .UseLazyLoadingProxies()
-            .UseSqlServer(config.GetValue<string>("ConnectionStrings:SqlDb"))
-        );
+builder.Services.RegisterDependenciesInjections();
+builder.Services.AddMediatR(Assembly.GetAssembly(typeof(GetUserTasksQuery)));
+await builder.Services.SetupDatabase(config.GetValue<string>("ConnectionStrings:SqlDb"));
 
 var app = builder.Build();
 

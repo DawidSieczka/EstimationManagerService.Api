@@ -8,7 +8,18 @@
 
   <ItemGroup>
     <Folder Include="Common\" />
-    <Folder Include="Operations\" />
+    <Folder Include="Operations\Users\" />
+    <Folder Include="Operations\UserTasks\Commands\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="10.0.1" />
+    <PackageReference Include="MediatR.Extensions.FluentValidation.AspNetCore" Version="3.0.0" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EstimationManagerService.Infrastructure\EstimationManagerService.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

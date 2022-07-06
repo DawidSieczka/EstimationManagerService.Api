@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EstimationManagerService.Api.Controllers
@@ -7,6 +7,7 @@ namespace EstimationManagerService.Api.Controllers
     [ApiController]
     public class ApiController : ControllerBase
     {
-        //Implement ISender.
+        private ISender _mediator;
+        protected ISender Mediator => _mediator ??= HttpContext.RequestServices.GetService<ISender>();
     }
 }
