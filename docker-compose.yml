@@ -1,0 +1,29 @@
+version: '3.4'
+
+services:
+  estimationmanagerservice.api:
+    image: ${DOCKER_REGISTRY-}estimationmanagerserviceapi
+    build:
+      context: .
+      dockerfile: EstimationManagerService.Api/Dockerfile
+    depends_on:
+     - sqlserver
+    environment:
+        ConnectionStrings__SQLDBConnectionString: "Server=sqlserver; Initial Catalog=EstimationManagerDbLoacl; User ID=SA; Password=Qwer!234;"
+
+
+  sqlserver:
+    container_name: sqlserver
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    restart: unless-stopped
+    ports:
+     - "1433:1433"
+    environment:
+     ACCEPT_EULA: "Y"
+     SA_PASSWORD: Qwer!234
+     MSSQL_PID: express 
+    volumes:
+      - EstimationManagerDbVolume:/var/opt/mssql
+  
+volumes:
+  EstimationManagerDbVolume:

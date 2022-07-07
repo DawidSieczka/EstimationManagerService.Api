@@ -5,6 +5,7 @@ using System.Reflection;
 using EstimationManagerService.Application.Common.Exceptions;
 using System.Text.Json.Serialization;
 using FluentValidation.AspNetCore;
+using EstimationManagerService.Application.Operations.Users.Commands.CreateUser;
 
 var builder = WebApplication.CreateBuilder(args);
 var config = builder.Configuration;
@@ -17,7 +18,7 @@ builder.Services.AddControllers(options =>
 {
     options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
 })
-.AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<GetUserTasksQueryValidator>());
+.AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<CreateUserCommand>());
     
 builder.Services.AddRouting(options => options.LowercaseUrls = true);
 builder.Services.AddEndpointsApiExplorer();
@@ -33,7 +34,11 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "ContactReplicationService.Api v1");
+        c.RoutePrefix = string.Empty;
+    });
 }
 
 app.ConfigureExceptionHandler(app.Environment);

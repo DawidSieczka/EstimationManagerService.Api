@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using EstimationManagerService.Domain.EntitiesConfigurations;
+using System.ComponentModel.DataAnnotations;
 
 namespace EstimationManagerService.Domain.Entities;
 
@@ -7,7 +8,8 @@ public class User
     public int Id { get; set; }
     public Guid ExternalId { get; set; }
 
-    [MaxLength(30)]
+    [MaxLength(EntityConfigurationValues.DisplayNameMaximumLenth)]
+    [MinLength(EntityConfigurationValues.DisplayNameMinimumLenth)]
     public string DisplayName { get; set; }
 
     public virtual List<UserTask> UserTasks { get; set; }
