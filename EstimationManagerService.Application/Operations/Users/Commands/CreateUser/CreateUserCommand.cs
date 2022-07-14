@@ -1,6 +1,6 @@
 ﻿using EstimationManagerService.Application.Services.Interfaces;
 using EstimationManagerService.Domain.Entities;
-using EstimationManagerService.Infrastructure;
+using EstimationManagerService.Persistance;
 using MediatR;
 
 namespace EstimationManagerService.Application.Operations.Users.Commands.CreateUser;

@@ -1,4 +1,4 @@
-﻿using EstimationManagerService.Infrastructure;
+﻿using EstimationManagerService.Persistance;
 using Microsoft.EntityFrameworkCore;
 
 namespace EstimationManagerService.Api.Extensions;

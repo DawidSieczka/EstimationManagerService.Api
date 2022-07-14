@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\EstimationManagerService.Infrastructure\EstimationManagerService.Infrastructure.csproj" />
+    <ProjectReference Include="..\EstimationManagerService.Persistance\EstimationManagerService.Persistance.csproj" />
   </ItemGroup>
 
 </Project>

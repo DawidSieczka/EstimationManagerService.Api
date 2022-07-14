@@ -1,5 +1,5 @@
 ﻿using EstimationManagerService.Application.Operations.UserTasks.Queries.Models;
-using EstimationManagerService.Infrastructure;
+using EstimationManagerService.Persistance;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 

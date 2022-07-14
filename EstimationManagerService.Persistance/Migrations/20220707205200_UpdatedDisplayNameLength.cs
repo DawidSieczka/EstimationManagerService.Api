@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace EstimationManagerService.Infrastructure.Migrations
+namespace EstimationManagerService.Persistance.Migrations
 {
     public partial class UpdatedDisplayNameLength : Migration
     {

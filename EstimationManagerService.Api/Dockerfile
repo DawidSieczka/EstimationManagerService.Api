@@ -9,7 +9,7 @@ FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY ["EstimationManagerService.Api/EstimationManagerService.Api.csproj", "EstimationManagerService.Api/"]
 COPY ["EstimationManagerService.Application/EstimationManagerService.Application.csproj", "EstimationManagerService.Application/"]
-COPY ["EstimationManagerService.Infrastructure/EstimationManagerService.Infrastructure.csproj", "EstimationManagerService.Infrastructure/"]
+COPY ["EstimationManagerService.Persistance/EstimationManagerService.Persistance.csproj", "EstimationManagerService.Persistance/"]
 COPY ["EstimationManagerService.Domain/EstimationManagerService.Domain.csproj", "EstimationManagerService.Domain/"]
 RUN dotnet restore "EstimationManagerService.Api/EstimationManagerService.Api.csproj"
 COPY . .

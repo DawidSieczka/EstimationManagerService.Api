@@ -1,7 +1,7 @@
 ﻿using EstimationManagerService.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace EstimationManagerService.Infrastructure
+namespace EstimationManagerService.Persistance
 {
     public class AppDbContext : DbContext
     {
