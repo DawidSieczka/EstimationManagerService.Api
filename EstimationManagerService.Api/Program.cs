@@ -27,7 +27,7 @@ internal class Program
 
         builder.Services.AddRouting(options => options.LowercaseUrls = true);
         builder.Services.AddEndpointsApiExplorer();
-        builder.Services.AddSwaggerGen();
+        builder.Services.ConfigureSwaggerGen();
         builder.Services.RegisterDependenciesInjections();
         builder.Services.AddMediatR(Assembly.GetAssembly(typeof(GetUserTasksQuery)));
         builder.Services.AddConfigurationOptions(config);

@@ -5,12 +5,12 @@ using MediatR;
 
 namespace EstimationManagerService.Application.Operations.Users.Commands.CreateUser;
 
-public class CreateUserCommand : IRequest<int>
+public class CreateUserCommand : IRequest<Guid>
 {
     public string DisplayName { get; set; }
 }
 
-public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, int>
+public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, Guid>
 {
     private readonly AppDbContext _appDbContext;
     private readonly IGuidService _guidService;
@@ -21,7 +21,7 @@ public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, int>
         _guidService = guidService;
     }
 
-    public async Task<int> Handle(CreateUserCommand request, CancellationToken cancellationToken)
+    public async Task<Guid> Handle(CreateUserCommand request, CancellationToken cancellationToken)
     {
         var userEntity = new User()
         {
@@ -32,6 +32,6 @@ public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, int>
         var entityEntry = await _appDbContext.AddAsync(userEntity, cancellationToken);
         await _appDbContext.SaveChangesAsync(cancellationToken);
 
-        return entityEntry.Entity.Id;
+        return entityEntry.Entity.ExternalId;
     }
 }
