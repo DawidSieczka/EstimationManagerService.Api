@@ -3,7 +3,7 @@ using EstimationManagerService.Application.Services.Interfaces;
 
 namespace EstimationManagerService.Api.Extensions;
 
-public static class DependencyInjectionRegistrationsExtension
+public static class DependencyInjectionRegistrationsExtensions
 {
     public static void RegisterDependenciesInjections(this IServiceCollection services)
     {

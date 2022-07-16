@@ -9,5 +9,6 @@ namespace EstimationManagerService.Persistance
 
         public DbSet<User> Users { get; set; }
         public DbSet<UserTask> UserTasks { get; set; }
+
     }
 }
