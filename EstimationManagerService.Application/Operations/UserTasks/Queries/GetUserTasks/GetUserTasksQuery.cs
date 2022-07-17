@@ -21,13 +21,13 @@ public class GetUserTasksQueryHandler : IRequestHandler<GetUserTasksQuery, List<
 
     public async Task<List<UserTaskDTO>> Handle(GetUserTasksQuery request, CancellationToken cancellationToken)
     {
-        var userEntity = await _appDbContext.Users.FirstOrDefaultAsync(x => x.ExternalId == request.UserExternalId,cancellationToken);
+        var userEntity = await _appDbContext.Users.FirstOrDefaultAsync(x => x.ExternalId == request.UserExternalId, cancellationToken);
         if (userEntity is null) throw new Exception("User not found");
 
         return userEntity.UserTasks.Select(x => new UserTaskDTO()
         {
             Id = x.Id,
-            Name = x.Name,
+            Name = x.DisplayName,
             Description = x.Description
         }).ToList();
     }

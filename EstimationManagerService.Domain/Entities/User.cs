@@ -11,6 +11,8 @@ public class User
     [MaxLength(EntityConfigurationValues.DisplayNameMaximumLenth)]
     [MinLength(EntityConfigurationValues.DisplayNameMinimumLenth)]
     public string DisplayName { get; set; }
-
     public virtual List<UserTask> UserTasks { get; set; }
+    public virtual List<Company> Companies { get; set; }
+    public virtual List<Company> OwnCompanies { get; set; }
+
 }
