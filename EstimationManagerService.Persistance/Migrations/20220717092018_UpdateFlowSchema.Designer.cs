@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EstimationManagerService.Persistance.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220717083836_AddedFlowSchema")]
-    partial class AddedFlowSchema
+    [Migration("20220717092018_UpdateFlowSchema")]
+    partial class UpdateFlowSchema
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -182,8 +182,7 @@ namespace EstimationManagerService.Persistance.Migrations
                     b.HasOne("EstimationManagerService.Domain.Entities.User", "Admin")
                         .WithMany("OwnCompanies")
                         .HasForeignKey("AdminId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.Navigation("Admin");
                 });

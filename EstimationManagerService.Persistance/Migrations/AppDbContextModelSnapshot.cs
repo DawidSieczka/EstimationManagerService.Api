@@ -180,8 +180,7 @@ namespace EstimationManagerService.Persistance.Migrations
                     b.HasOne("EstimationManagerService.Domain.Entities.User", "Admin")
                         .WithMany("OwnCompanies")
                         .HasForeignKey("AdminId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.Navigation("Admin");
                 });
