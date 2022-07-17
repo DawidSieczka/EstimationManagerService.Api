@@ -2,7 +2,11 @@
 
 public class NotFoundException : CustomException
 {
-    public override int StatusCode { get; set; } = 500;
+    public override int StatusCode { get; set; } = 404;
+
+    public NotFoundException(string message) : base(message)
+    {
+    }
 
     public NotFoundException(int id) : base($"Object of id: '{id}' not found")
     {

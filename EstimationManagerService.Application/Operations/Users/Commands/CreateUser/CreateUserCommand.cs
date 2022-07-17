@@ -1,4 +1,5 @@
-﻿using EstimationManagerService.Application.Services.Interfaces;
+﻿using EstimationManagerService.Application.Common.Helpers.MockingHelpers;
+using EstimationManagerService.Application.Common.Helpers.MockingHelpers.Interfaces;
 using EstimationManagerService.Domain.Entities;
 using EstimationManagerService.Persistance;
 using MediatR;
@@ -13,12 +14,12 @@ public class CreateUserCommand : IRequest<Guid>
 public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, Guid>
 {
     private readonly AppDbContext _appDbContext;
-    private readonly IGuidService _guidService;
+    private readonly IGuidHelper _guidHelper;
 
-    public CreateUserCommandHandler(AppDbContext appDbContext, IGuidService guidService)
+    public CreateUserCommandHandler(AppDbContext appDbContext, IGuidHelper guidHelper)
     {
         _appDbContext = appDbContext;
-        _guidService = guidService;
+        _guidHelper = guidHelper;
     }
 
     public async Task<Guid> Handle(CreateUserCommand request, CancellationToken cancellationToken)
@@ -26,7 +27,7 @@ public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, Guid>
         var userEntity = new User()
         {
             DisplayName = request.DisplayName,
-            ExternalId = _guidService.CreateGuid()
+            ExternalId = _guidHelper.CreateGuid()
         };
 
         var entityEntry = await _appDbContext.AddAsync(userEntity, cancellationToken);

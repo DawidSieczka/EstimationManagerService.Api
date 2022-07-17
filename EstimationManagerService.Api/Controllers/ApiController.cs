@@ -21,4 +21,10 @@ public class ApiController : ControllerBase
     /// <typeparam name="ISender"></typeparam>
     /// <returns></returns>
     protected ISender Mediator => _mediator ??= HttpContext.RequestServices.GetService<ISender>();
+
+    protected string GetCreatedRoute<T>(string controller, T id)
+    {
+        return $"api/{controller.Replace("Controller", string.Empty)}/{id}".ToLower();
+    }
+
 }

@@ -7,6 +7,7 @@ namespace EstimationManagerService.Domain.Entities;
 public class Company
 {
     public int Id { get; set; }
+    public Guid ExternalId { get; set; }
 
     [MaxLength(EntityConfigurationValues.DisplayNameMaximumLenth)]
     [MinLength(EntityConfigurationValues.DisplayNameMinimumLenth)]

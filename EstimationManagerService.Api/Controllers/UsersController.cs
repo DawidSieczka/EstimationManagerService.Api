@@ -39,7 +39,9 @@ public class UsersController : ApiController
     [HttpPost]
     public async Task<IActionResult> CreateUserAsync(CreateUserCommand createUserCommand)
     {
-        var userId = await Mediator.Send(createUserCommand);
-        return Ok(userId);
+        var externalUserId = await Mediator.Send(createUserCommand);
+        var createdRoute = GetCreatedRoute(nameof(CompaniesController), externalUserId);
+
+        return Created(createdRoute, externalUserId);
     }
 }

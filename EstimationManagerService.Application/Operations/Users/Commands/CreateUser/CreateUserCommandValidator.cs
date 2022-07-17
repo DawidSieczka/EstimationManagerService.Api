@@ -10,7 +10,7 @@ public class CreateUserCommandValidator : AbstractValidator<CreateUserCommand>
     {
         RuleFor(x => x.DisplayName)
             .NotEmpty()
-            .MinimumLength(EntityConfigurationValues.DisplayNameMinimumLenth + 5)
+            .MinimumLength(EntityConfigurationValues.DisplayNameMinimumLenth)
             .MaximumLength(EntityConfigurationValues.DisplayNameMaximumLenth)
             .WithMessage(ValidationMessages.InvalidLengthValue(EntityConfigurationValues.DisplayNameMinimumLenth, EntityConfigurationValues.DisplayNameMaximumLenth));
     }
