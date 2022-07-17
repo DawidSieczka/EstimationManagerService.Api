@@ -16,7 +16,7 @@ public class UserTasksController : ApiController
     /// <param name="externalId">User's external id.</param>
     /// <returns>Collection of users tasks.</returns>
     [SwaggerResponse(StatusCodes.Status200OK, "Received a collection of user's tasks", typeof(List<UserTaskDTO>))]
-    [SwaggerResponse(StatusCodes.Status404NotFound, "User external id not found. The collection not received.", typeof(List<UserTaskDTO>))]
+    [SwaggerResponse(StatusCodes.Status404NotFound, "User not found. The collection not received.", typeof(List<UserTaskDTO>))]
     [HttpGet("{externalId}")]
     public async Task<IActionResult> GetUserTasks(Guid externalId)
     {

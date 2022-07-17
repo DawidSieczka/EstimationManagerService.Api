@@ -17,6 +17,7 @@ public class UsersController : ApiController
     /// <param name="page">Page number to fetch data from.</param>
     /// <param name="pageSize">Amount of data per page.</param>
     /// <returns>List of users.</returns>
+    [SwaggerResponse(StatusCodes.Status200OK, "Returns paginated users", typeof(Guid))]
     [HttpGet]
     public async Task<IActionResult> GetUsersAsync(int page = 1, int pageSize = 10)
     {
