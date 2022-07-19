@@ -1,3 +1,4 @@
+using EstimationManagerService.Persistance;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -16,6 +17,7 @@ public class SetupTests
     private static IConfiguration _configuration { get; set; }
     private static IServiceScopeFactory _scopeFactory { get; set; }
     private static Checkpoint _checkpoint { get; set; }
+    public static AppDbContext DbContext { get; set; }
 
     [OneTimeSetUp]
     public async Task Setup()
@@ -57,4 +59,6 @@ public class SetupTests
     {
         await _checkpoint.Reset(_configuration.GetConnectionString("SqlDatabase"));
     }
+
+    public static AppDbContext GetDbContext() => _scopeFactory.CreateAsyncScope().ServiceProvider.GetRequiredService<AppDbContext>();
 }
