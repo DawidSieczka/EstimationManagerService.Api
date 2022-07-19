@@ -1,3 +1,4 @@
+using EstimationManagerService.Application.Common.Exceptions;
 using EstimationManagerService.Application.Repositories.Interfaces;
 using EstimationManagerService.Persistance;
 using MediatR;
@@ -27,8 +28,11 @@ public class DeleteCompanyCommandHandler : IRequestHandler<DeleteCompanyCommand>
     public async Task<Unit> Handle(DeleteCompanyCommand request, CancellationToken cancellationToken)
     {
         var ownerUserId = await _usersDbRepository.GetUserIdByUserExternalIdAsync(request.OwnerUserExternalId, cancellationToken);
+        
         var companyEntity = await _companiesDbRepository.GetOwnersCompany(ownerUserId, request.CompanyExternalId, cancellationToken);
-
+        if(companyEntity is null)
+            throw new NotFoundException($"Company with externalId: {request.CompanyExternalId} for User with externalId: {request.OwnerUserExternalId} not found!");
+        
         _dbContext.Remove(companyEntity);
 
         await _dbContext.SaveChangesAsync(cancellationToken);
