@@ -44,11 +44,11 @@ public class Startup
         services.SetupDatabase(connectionStrings.SqlDatabase);
     }
 
-    public void Configure(WebApplication app, IWebHostEnvironment env)
+    public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
         _env = env;
 
-        if (app.Environment.IsDevelopment())
+        if (env.IsDevelopment())
         {
             app.UseSwagger();
             app.UseSwaggerUI(c =>
@@ -58,14 +58,17 @@ public class Startup
             });
         }
 
-        app.ConfigureExceptionHandler(app.Environment);
+        app.ConfigureExceptionHandler(env);
 
         app.UseHttpsRedirection();
 
+        app.UseRouting();
+
         app.UseAuthorization();
 
-        app.MapControllers();
-
-        app.Run();
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapControllers();
+        });
     }
 }
