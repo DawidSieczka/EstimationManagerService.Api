@@ -11,5 +11,6 @@ public static class DependencyInjectionRegistrationsExtensions
     {
         services.AddTransient<IGuidHelper, GuidHelper>();
         services.AddScoped<IUsersDbRepository, UsersDbRepository>();
+        services.AddScoped<ICompaniesDbRepository, CompaniesDbRepository>();        
     }
 }

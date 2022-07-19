@@ -1,6 +1,9 @@
 using System;
 using EstimationManagerService.Application.Operations.Companies.Commands.CreateCompany;
+using EstimationManagerService.Application.Operations.Companies.Commands.DeleteCompany;
 using EstimationManagerService.Application.Operations.Companies.Commands.UpdateCompany;
+using EstimationManagerService.Application.Operations.Companies.Queries.GetAllUserCompanies;
+using EstimationManagerService.Application.Operations.Companies.Queries.Models;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
@@ -11,6 +14,18 @@ namespace EstimationManagerService.Api.Controllers;
 /// </summary>
 public class CompaniesController : ApiController
 {
+    /// <summary>
+    /// Get all companies owned by provided user.
+    /// </summary>
+    /// <param name="ownerUserId">User external id.</param>
+    /// <returns>List of owned companies.</returns>
+    [SwaggerResponse(StatusCodes.Status200OK, "Returns all owned companies.", typeof(UserCompanyDto))]
+    [HttpGet("{ownerUserId}")]
+    public async Task<IActionResult> GetAllUserCompaniesAsync(Guid ownerUserId)
+    {
+        var companies = await Mediator.Send(new GetAllUserCompaniesQuery() { OnwerUserId = ownerUserId });
+        return Ok(companies);
+    }
 
     /// <summary>
     /// Create company as its Admin.
@@ -41,6 +56,27 @@ public class CompaniesController : ApiController
     public async Task<IActionResult> UpdateCompanyAsync(UpdateCompanyCommand command)
     {
         await Mediator.Send(command);
+        return NoContent();
+    }
+
+    /// <summary>
+    /// Deletes user owner's company.
+    /// </summary>
+    /// <param name="ownerUserId">User external id.</param>
+    /// <param name="companyId">Company external id.</param>
+    /// <returns>No content.</returns>
+    [SwaggerResponse(StatusCodes.Status204NoContent, "Succesfully deleted company.")]
+    [SwaggerResponse(StatusCodes.Status404NotFound, "Owner user hasn't been found.")]
+    [SwaggerResponse(StatusCodes.Status404NotFound, "Company hasn't been found.")]
+    [HttpDelete("{ownerUserId}/{companyId}")]
+    public async Task<IActionResult> DeleteCompanyAsync(Guid ownerUserId, Guid companyId)
+    {
+        await Mediator.Send(new DeleteCompanyCommand()
+        {
+            CompanyExternalId = companyId,
+            OwnerUserExternalId = ownerUserId
+        });
+
         return NoContent();
     }
 }
