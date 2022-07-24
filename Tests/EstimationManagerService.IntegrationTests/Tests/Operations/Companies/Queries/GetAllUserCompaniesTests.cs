@@ -6,6 +6,6 @@ using System.Threading.Tasks;
 
 namespace EstimationManagerService.IntegrationTests.Tests.Operations.Companies.Queries;
 
-internal class GetAllUserCompaniesTests
+internal class GetAllUserCompaniesTests : TestBase
 {
 }

@@ -1,4 +1,5 @@
 using EstimationManagerService.Persistance;
+using MediatR;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -61,4 +62,6 @@ public class SetupTests
     }
 
     public static AppDbContext GetDbContext() => _scopeFactory.CreateAsyncScope().ServiceProvider.GetRequiredService<AppDbContext>();
+
+    public static ISender GetMediator() => _scopeFactory.CreateAsyncScope().ServiceProvider.GetRequiredService<ISender>();
 }

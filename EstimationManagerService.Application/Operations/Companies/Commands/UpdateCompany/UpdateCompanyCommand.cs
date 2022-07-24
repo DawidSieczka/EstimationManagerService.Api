@@ -18,22 +18,20 @@ public class UpdateCompanyCommandHandler : IRequestHandler<UpdateCompanyCommand>
 {
     private readonly AppDbContext _dbContext;
     private readonly IUsersDbRepository _usersDbRepository;
+    private readonly ICompaniesDbRepository _companiesDbRepository;
 
-    public UpdateCompanyCommandHandler(AppDbContext dbContext, IUsersDbRepository usersDbRepository)
+    public UpdateCompanyCommandHandler(AppDbContext dbContext, IUsersDbRepository usersDbRepository, ICompaniesDbRepository companiesDbRepository)
     {
         _dbContext = dbContext;
         _usersDbRepository = usersDbRepository;
+        _companiesDbRepository = companiesDbRepository;
     }
 
     public async Task<Unit> Handle(UpdateCompanyCommand request, CancellationToken cancellationToken)
     {
         var ownerUserId = await _usersDbRepository.GetUserIdByUserExternalIdAsync(request.OwnerUserExternalId, cancellationToken);
-
-        var companyEntity = await _dbContext.Companies.FirstOrDefaultAsync(x => x.ExternalId == request.CompanyExternalId && x.AdminId == ownerUserId, cancellationToken);
-
-        if (companyEntity is null)
-            throw new NotFoundException($"Company with id: {request.CompanyExternalId} for admin with id: {request.OwnerUserExternalId} not found");
-
+        var companyEntity = await _companiesDbRepository.GetOwnersCompany(ownerUserId, request.CompanyExternalId, cancellationToken);
+        
         companyEntity.DisplayName = request.DisplayName;
 
         await _dbContext.SaveChangesAsync(cancellationToken);
