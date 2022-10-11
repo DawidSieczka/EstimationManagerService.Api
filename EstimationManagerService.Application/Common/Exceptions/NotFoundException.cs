@@ -23,4 +23,10 @@ public class NotFoundException : CustomException
     public NotFoundException(Guid id, Type type) : base($"Object of id: '{id}' and type of: {type} not found")
     {
     }
+
+
+    public NotFoundException(string objectName, Guid externalId) : base(
+        $"{objectName} of externalId: {externalId} not found!")
+    {
+    }
 }

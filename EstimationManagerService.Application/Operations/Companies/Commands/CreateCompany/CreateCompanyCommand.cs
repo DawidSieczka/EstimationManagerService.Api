@@ -27,9 +27,11 @@ namespace EstimationManagerService.Application.Operations.Companies.Commands.Cre
 
         public async Task<Guid> Handle(CreateCompanyCommand request, CancellationToken cancellationToken)
         {
-            var ownerUserEntity = await _dbContext.Users.FirstOrDefaultAsync(x => x.ExternalId == request.OwnerUserExternalId, cancellationToken);
+            var ownerUserEntity =
+                await _dbContext.Users.FirstOrDefaultAsync(x => x.ExternalId == request.OwnerUserExternalId,
+                    cancellationToken);
             if (ownerUserEntity is null)
-                throw new NotFoundException($"User with externalId: {request.OwnerUserExternalId} not found");
+                throw new NotFoundException("User", request.OwnerUserExternalId);
 
             var companyEntity = await _dbContext.Companies.AddAsync(new Company()
             {
