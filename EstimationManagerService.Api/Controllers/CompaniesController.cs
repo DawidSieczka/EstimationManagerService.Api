@@ -23,7 +23,7 @@ public class CompaniesController : ApiController
     [HttpGet("{ownerUserId}")]
     public async Task<IActionResult> GetAllUserCompaniesAsync(Guid ownerUserId)
     {
-        var companies = await Mediator.Send(new GetAllUserCompaniesQuery() { OnwerUserId = ownerUserId });
+        var companies = await Mediator.Send(new GetAllUserCompaniesQuery() { OnwerUserExternalId = ownerUserId });
         return Ok(companies);
     }
 

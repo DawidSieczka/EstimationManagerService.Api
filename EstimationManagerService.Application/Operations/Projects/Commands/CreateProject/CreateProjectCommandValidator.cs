@@ -2,11 +2,11 @@ using EstimationManagerService.Application.Common.Validations;
 using EstimationManagerService.Domain.EntitiesConfigurations;
 using FluentValidation;
 
-namespace EstimationManagerService.Application.Operations.Groups.Commands.CreateGroup;
+namespace EstimationManagerService.Application.Operations.Projects.Commands.CreateProject;
 
-public class CreateGroupCommandValidator : AbstractValidator<CreateGroupCommand>
+public class CreateProjectCommandValidator : AbstractValidator<CreateProjectCommand>
 {
-    public CreateGroupCommandValidator()
+    public CreateProjectCommandValidator()
     {
         RuleFor(x => x.DisplayName).NotEmpty()
             .MinimumLength(EntityConfigurationValues.DisplayNameMinimumLenth)
@@ -14,7 +14,7 @@ public class CreateGroupCommandValidator : AbstractValidator<CreateGroupCommand>
             .WithMessage(ValidationMessages.InvalidLengthValue(EntityConfigurationValues.DisplayNameMinimumLenth,
                 EntityConfigurationValues.DisplayNameMaximumLenth));
         
-        RuleFor(x=>x.CompanyExternalId).NotEmpty()
+        RuleFor(x=>x.GroupExternalId).NotEmpty()
             .WithMessage(ValidationMessages.InvalidEmptyValue);
     }
 }

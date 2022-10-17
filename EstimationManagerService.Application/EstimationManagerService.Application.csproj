@@ -9,6 +9,8 @@
   <ItemGroup>
     <Folder Include="Operations\Users\Queries\" />
     <Folder Include="Operations\UserTasks\Commands\" />
+    <Folder Include="Operations\UserTasks\Commands\DeleteUserTask" />
+    <Folder Include="Operations\UserTasks\Commands\UpdateUserTask" />
   </ItemGroup>
 
   <ItemGroup>

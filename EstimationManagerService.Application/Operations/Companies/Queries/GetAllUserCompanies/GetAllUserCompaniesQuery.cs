@@ -8,7 +8,7 @@ namespace EstimationManagerService.Application.Operations.Companies.Queries.GetA
 {
     public class GetAllUserCompaniesQuery : IRequest<ICollection<UserCompanyDto>>
     {
-        public Guid OnwerUserId { get; set; }
+        public Guid OnwerUserExternalId { get; set; }
     }
 
     public class GetAllUserCompaniesQueryHandler : IRequestHandler<GetAllUserCompaniesQuery, ICollection<UserCompanyDto>>
@@ -24,7 +24,7 @@ namespace EstimationManagerService.Application.Operations.Companies.Queries.GetA
 
         public async Task<ICollection<UserCompanyDto>> Handle(GetAllUserCompaniesQuery request, CancellationToken cancellationToken)
         {
-            var ownerUserId = await _usersDbRepository.GetUserIdByUserExternalIdAsync(request.OnwerUserId, cancellationToken);
+            var ownerUserId = await _usersDbRepository.GetUserIdByUserExternalIdAsync(request.OnwerUserExternalId, cancellationToken);
             var companies = await _dbContext.Companies.Where(x => x.AdminId == ownerUserId).Select(x => new UserCompanyDto()
             {
                 ExternalId = x.ExternalId,

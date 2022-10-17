@@ -9,7 +9,7 @@ namespace EstimationManagerService.Application.Operations.Groups.Commands.Create
 
 public class CreateGroupCommand : IRequest<Guid>
 {
-    public Guid ExternalCompanyId { get; set; }
+    public Guid CompanyExternalId { get; set; }
     public string DisplayName { get; set; }
 }
 
@@ -26,11 +26,11 @@ public class CreateGroupCommandHandler : IRequestHandler<CreateGroupCommand, Gui
 
     public async Task<Guid> Handle(CreateGroupCommand request, CancellationToken cancellationToken)
     {
-        var companyEntity = _dbContext.Companies.FirstOrDefaultAsync(x => x.ExternalId == request.ExternalCompanyId,
+        var companyEntity = _dbContext.Companies.FirstOrDefaultAsync(x => x.ExternalId == request.CompanyExternalId,
             cancellationToken: cancellationToken);
 
         if (companyEntity is null)
-            throw new NotFoundException("Company", request.ExternalCompanyId);
+            throw new NotFoundException("Company", request.CompanyExternalId);
 
         var groupEntity = await _dbContext.Groups.AddAsync(new Group()
         {
