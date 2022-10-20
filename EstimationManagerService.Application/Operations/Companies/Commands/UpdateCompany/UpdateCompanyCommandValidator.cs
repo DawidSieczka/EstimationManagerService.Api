@@ -11,9 +11,9 @@ namespace EstimationManagerService.Application.Operations.Companies.Commands.Upd
         {
             RuleFor(x => x.DisplayName)
                         .NotEmpty()
-                        .MinimumLength(EntityConfigurationValues.DisplayNameMinimumLenth)
-                        .MaximumLength(EntityConfigurationValues.DisplayNameMaximumLenth)
-                        .WithMessage(ValidationMessages.InvalidLengthValue(EntityConfigurationValues.DisplayNameMinimumLenth, EntityConfigurationValues.DisplayNameMaximumLenth));
+                        .MinimumLength(EntityConfigurationValues.DisplayNameMinimumLength)
+                        .MaximumLength(EntityConfigurationValues.DisplayNameMaximumLength)
+                        .WithMessage(ValidationMessages.InvalidLengthValue(EntityConfigurationValues.DisplayNameMinimumLength, EntityConfigurationValues.DisplayNameMaximumLength));
 
             RuleFor(x => x.OwnerUserExternalId)
                 .NotEmpty()

@@ -9,10 +9,10 @@ public class CreateProjectCommandValidator : AbstractValidator<CreateProjectComm
     public CreateProjectCommandValidator()
     {
         RuleFor(x => x.DisplayName).NotEmpty()
-            .MinimumLength(EntityConfigurationValues.DisplayNameMinimumLenth)
-            .MaximumLength(EntityConfigurationValues.DisplayNameMaximumLenth)
-            .WithMessage(ValidationMessages.InvalidLengthValue(EntityConfigurationValues.DisplayNameMinimumLenth,
-                EntityConfigurationValues.DisplayNameMaximumLenth));
+            .MinimumLength(EntityConfigurationValues.DisplayNameMinimumLength)
+            .MaximumLength(EntityConfigurationValues.DisplayNameMaximumLength)
+            .WithMessage(ValidationMessages.InvalidLengthValue(EntityConfigurationValues.DisplayNameMinimumLength,
+                EntityConfigurationValues.DisplayNameMaximumLength));
         
         RuleFor(x=>x.GroupExternalId).NotEmpty()
             .WithMessage(ValidationMessages.InvalidEmptyValue);

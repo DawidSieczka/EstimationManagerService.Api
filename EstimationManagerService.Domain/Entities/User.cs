@@ -8,8 +8,8 @@ public class User
     public int Id { get; set; }
     public Guid ExternalId { get; set; }
 
-    [MaxLength(EntityConfigurationValues.DisplayNameMaximumLenth)]
-    [MinLength(EntityConfigurationValues.DisplayNameMinimumLenth)]
+    [MaxLength(EntityConfigurationValues.DisplayNameMaximumLength)]
+    [MinLength(EntityConfigurationValues.DisplayNameMinimumLength)]
     public string DisplayName { get; set; }
     public virtual List<UserTask> UserTasks { get; set; }
     public virtual List<Company> Companies { get; set; }

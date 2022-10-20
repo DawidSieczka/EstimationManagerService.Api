@@ -1,5 +1,5 @@
+using EstimationManagerService.Application.Common.Exceptions;
 using EstimationManagerService.Application.Operations.Companies.Queries.Models;
-using EstimationManagerService.Application.Repositories.Interfaces;
 using EstimationManagerService.Persistance;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -14,18 +14,20 @@ namespace EstimationManagerService.Application.Operations.Companies.Queries.GetA
     public class GetAllUserCompaniesQueryHandler : IRequestHandler<GetAllUserCompaniesQuery, ICollection<UserCompanyDto>>
     {
         private readonly AppDbContext _dbContext;
-        private readonly IUsersDbRepository _usersDbRepository;
 
-        public GetAllUserCompaniesQueryHandler(AppDbContext dbContext, IUsersDbRepository usersDbRepository)
+        public GetAllUserCompaniesQueryHandler(AppDbContext dbContext)
         {
             _dbContext = dbContext;
-            _usersDbRepository = usersDbRepository;
         }
 
         public async Task<ICollection<UserCompanyDto>> Handle(GetAllUserCompaniesQuery request, CancellationToken cancellationToken)
         {
-            var ownerUserId = await _usersDbRepository.GetUserIdByUserExternalIdAsync(request.OnwerUserExternalId, cancellationToken);
-            var companies = await _dbContext.Companies.Where(x => x.AdminId == ownerUserId).Select(x => new UserCompanyDto()
+            var userEntity = await _dbContext.Users.FirstOrDefaultAsync(x => x.ExternalId == request.OnwerUserExternalId, cancellationToken);
+
+            if (userEntity is null)
+                throw new NotFoundException("User", request.OnwerUserExternalId);
+
+            var companies = await _dbContext.Companies.Where(x => x.AdminId == userEntity.Id).Select(x => new UserCompanyDto()
             {
                 ExternalId = x.ExternalId,
                 DisplayName = x.DisplayName,

@@ -20,7 +20,7 @@ public class UserTasksController : ApiController
     [HttpGet("{externalId}")]
     public async Task<IActionResult> GetUserTasks(Guid externalId)
     {
-        var userTasks = await Mediator.Send(new GetUserTasksQuery() { UserExternalId = externalId });
+        var userTasks = await Mediator.Send(new GetAllUserTasksQuery() { UserExternalId = externalId });
         return Ok(userTasks);
     }
 }

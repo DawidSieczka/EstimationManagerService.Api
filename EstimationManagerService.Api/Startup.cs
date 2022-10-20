@@ -37,7 +37,7 @@ public class Startup
         services.AddEndpointsApiExplorer();
         services.ConfigureSwaggerGen();
         services.RegisterDependenciesInjections();
-        services.AddMediatR(Assembly.GetAssembly(typeof(GetUserTasksQuery)));
+        services.AddMediatR(Assembly.GetAssembly(typeof(GetAllUserTasksQuery)));
         services.AddConfigurationOptions(_configuration);
 
         var connectionStrings = services.BuildServiceProvider().GetRequiredService<IOptions<ConnectionStringsOptions>>().Value;

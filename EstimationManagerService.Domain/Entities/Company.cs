@@ -9,8 +9,8 @@ public class Company
     public int Id { get; set; }
     public Guid ExternalId { get; set; }
 
-    [MaxLength(EntityConfigurationValues.DisplayNameMaximumLenth)]
-    [MinLength(EntityConfigurationValues.DisplayNameMinimumLenth)]
+    [MaxLength(EntityConfigurationValues.DisplayNameMaximumLength)]
+    [MinLength(EntityConfigurationValues.DisplayNameMinimumLength)]
     public string DisplayName { get; set; }
     public virtual User Admin { get; set; }
     public int AdminId { get; set; }

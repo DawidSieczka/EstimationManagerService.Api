@@ -8,8 +8,8 @@ namespace EstimationManagerService.Domain.Entities
     {
         public int Id { get; set; }
         public Guid ExternalId { get; set; }
-        [MaxLength(EntityConfigurationValues.DisplayNameMaximumLenth)]
-        [MinLength(EntityConfigurationValues.DisplayNameMinimumLenth)]
+        [MaxLength(EntityConfigurationValues.DisplayNameMaximumLength)]
+        [MinLength(EntityConfigurationValues.DisplayNameMinimumLength)]
         public string DisplayName { get; set; }
         public virtual List<Project> Projects { get; set; }
         public virtual Company Company { get; set; }

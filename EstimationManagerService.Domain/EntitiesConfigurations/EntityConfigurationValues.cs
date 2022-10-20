@@ -8,7 +8,8 @@ namespace EstimationManagerService.Domain.EntitiesConfigurations;
 
 public static class EntityConfigurationValues
 {
-    public const int DisplayNameMinimumLenth = 3;
-    public const int DisplayNameMaximumLenth = 30;
-
+    public const int DisplayNameMinimumLength = 3;
+    public const int DisplayNameMaximumLength = 30;
+    public const int DescriptionMinimumLength = 1;
+    public const int DescriptionMaximumLength = 100;
 }

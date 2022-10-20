@@ -1,6 +1,5 @@
 ﻿using EstimationManagerService.Application.Common.Helpers.MockingHelpers.Interfaces;
 using EstimationManagerService.Application.Operations.Companies.Commands.UpdateCompany;
-using EstimationManagerService.Application.Repositories.Interfaces;
 using EstimationManagerService.Domain.Entities;
 using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
@@ -37,7 +36,7 @@ internal class UpdateCompanyTests : TestBase
         };
 
         await _dbContext.Companies.AddAsync(company);
-        await _dbContext.SaveChangesAsync();
+        await _dbContext.SaveChangesAsync();    
 
         //Act
         var updateCompanyCommand = new UpdateCompanyCommand()
@@ -46,13 +45,8 @@ internal class UpdateCompanyTests : TestBase
             OwnerUserExternalId = user.ExternalId,
             CompanyExternalId = company.ExternalId
         };
-
-        var usersDbRepositoryMock = new Mock<IUsersDbRepository>();
-        usersDbRepositoryMock.Setup(x=>x.GetUserIdByUserExternalIdAsync(user.ExternalId, CancellationToken.None)).ReturnsAsync(user.Id);
-        var companiesDbRepositoryMock = new Mock<ICompaniesDbRepository>();
-        companiesDbRepositoryMock.Setup(x => x.GetOwnersCompany(user.Id, company.ExternalId, CancellationToken.None)).ReturnsAsync(company);
-
-        var handler = new UpdateCompanyCommandHandler(_dbContext, usersDbRepositoryMock.Object, companiesDbRepositoryMock.Object);
+        
+        var handler = new UpdateCompanyCommandHandler(_dbContext);
         await handler.Handle(updateCompanyCommand, CancellationToken.None);
         
         //Assert

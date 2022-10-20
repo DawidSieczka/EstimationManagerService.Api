@@ -1,5 +1,4 @@
 ﻿using EstimationManagerService.Application.Operations.Companies.Commands.DeleteCompany;
-using EstimationManagerService.Application.Repositories.Interfaces;
 using EstimationManagerService.Domain.Entities;
 using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
@@ -37,23 +36,18 @@ internal class DeleteCompanyTests : TestBase
         await _dbContext.SaveChangesAsync();
 
         //Act
-        var usersDbRepositoryMock = new Mock<IUsersDbRepository>();
-        usersDbRepositoryMock.Setup(x => x.GetUserIdByUserExternalIdAsync(user.ExternalId, CancellationToken.None)).ReturnsAsync(user.Id);
-
-        var companiesDbRepositoryMock = new Mock<ICompaniesDbRepository>();
-        companiesDbRepositoryMock.Setup(x => x.GetOwnersCompany(user.Id, company.ExternalId, CancellationToken.None)).ReturnsAsync(company);
-
         var command = new DeleteCompanyCommand()
         {
             CompanyExternalId = company.ExternalId,
             OwnerUserExternalId = user.ExternalId
         };
 
-        var handler = new DeleteCompanyCommandHandler(_dbContext, usersDbRepositoryMock.Object, companiesDbRepositoryMock.Object);
+        var handler = new DeleteCompanyCommandHandler(_dbContext);
         await handler.Handle(command, CancellationToken.None);
 
         //Assert
-        var notExistingCompany = await _dbContext.Companies.FirstOrDefaultAsync(x => x.ExternalId == company.ExternalId);
+        var notExistingCompany =
+            await _dbContext.Companies.FirstOrDefaultAsync(x => x.ExternalId == company.ExternalId);
         notExistingCompany.Should().BeNull();
     }
 }

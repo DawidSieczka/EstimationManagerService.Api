@@ -2,11 +2,11 @@ using EstimationManagerService.Application.Common.Validations;
 using EstimationManagerService.Domain.EntitiesConfigurations;
 using FluentValidation;
 
-namespace EstimationManagerService.Application.Operations.UserTasks.Commands.CreateUserTask;
+namespace EstimationManagerService.Application.Operations.UserTasks.Commands.UpdateUserTask;
 
-public class CreateUserTaskCommandValidator : AbstractValidator<CreateUserTaskCommand>
+public class UpdateUserTaskCommandValidator : AbstractValidator<UpdateUserTaskCommand>
 {
-    public CreateUserTaskCommandValidator()
+    public UpdateUserTaskCommandValidator()
     {
         RuleFor(x => x.DisplayName)
             .MinimumLength(EntityConfigurationValues.DisplayNameMinimumLength)
