@@ -18,7 +18,7 @@ public class ProjectsController : ApiController
     [HttpGet("{groupExternalId}")]
     public async Task<ActionResult<IEnumerable<ProjectDto>>> GetAllProjectsInGroupAsync(Guid groupExternalId)
     {
-        var projects = await Mediator.Send(new GetProjectsCommand() { GroupExternalId = groupExternalId });
+        var projects = await Mediator.Send(new GetProjectsQuery() { GroupExternalId = groupExternalId });
         return Ok(projects);
     }
 
@@ -27,7 +27,7 @@ public class ProjectsController : ApiController
     /// </summary>
     /// <param name="projectExternalId">Project external Id type of Guid.</param>
     /// <returns>Project details.</returns>
-    [HttpGet("{projectExternalId}")]
+    [HttpGet("{projectExternalId}/details")]
     public async Task<ActionResult<ProjectDto>> GetProjectDetailsAsync(Guid projectExternalId)
     {
         var project = await Mediator.Send(new GetProjectCommand() { ProjectExternalId = projectExternalId });

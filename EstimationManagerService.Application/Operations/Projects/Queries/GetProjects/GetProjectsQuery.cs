@@ -7,21 +7,21 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EstimationManagerService.Application.Operations.Projects.Queries.GetProjects;
 
-public class GetProjectsCommand : IRequest<IEnumerable<ProjectDto>>
+public class GetProjectsQuery : IRequest<IEnumerable<ProjectDto>>
 {
     public Guid GroupExternalId { get; set; }
 }
 
-public class GetProjectsCommandHandler : IRequestHandler<GetProjectsCommand, IEnumerable<ProjectDto>>
+public class GetProjectsQueryHandler : IRequestHandler<GetProjectsQuery, IEnumerable<ProjectDto>>
 {
     private readonly AppDbContext _dbContext;
 
-    public GetProjectsCommandHandler(AppDbContext dbContext)
+    public GetProjectsQueryHandler(AppDbContext dbContext)
     {
         _dbContext = dbContext;
     }
 
-    public async Task<IEnumerable<ProjectDto>> Handle(GetProjectsCommand request, CancellationToken cancellationToken)
+    public async Task<IEnumerable<ProjectDto>> Handle(GetProjectsQuery request, CancellationToken cancellationToken)
     {
         var groupEntity = await _dbContext.Groups.FirstOrDefaultAsync(x => x.ExternalId == request.GroupExternalId,
                 cancellationToken);
