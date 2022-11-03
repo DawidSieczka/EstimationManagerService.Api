@@ -18,5 +18,10 @@ public class UserTaskConfiguration : IEntityTypeConfiguration<UserTask>
                 .WithMany(x => x.UserTasks)
                 .HasForeignKey(x => x.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+        builder.HasMany(x => x.TaskTimeDetails)
+            .WithOne(x => x.UserTask)
+            .HasForeignKey(x => x.UserTaskId)
+            .OnDelete(DeleteBehavior.Cascade);
     }
 }

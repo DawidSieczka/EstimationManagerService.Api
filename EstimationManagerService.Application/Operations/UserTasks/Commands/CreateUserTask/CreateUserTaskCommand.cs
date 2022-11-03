@@ -11,6 +11,8 @@ public class CreateUserTaskCommand : IRequest<Guid>
 {
     public string DisplayName { get; set; }
     public string Description { get; set; }
+    public DateTime? TaskStartDate { get; set; }
+    public TimeSpan? TaskEstimationTime { get; set; }
     public Guid ProjectExternalId { get; set; }
     public Guid UserExternalId { get; set; }
 }
@@ -42,6 +44,10 @@ public class CreateUserTaskCommandHandler : IRequestHandler<CreateUserTaskComman
             ExternalId = _guidHelper.CreateGuid(),
             DisplayName = request.DisplayName,
             Description = request.Description,
+            TaskStartDate = request.TaskStartDate,
+            TaskEndDate = null,
+            TaskEstimationTime = request.TaskEstimationTime,
+            TaskTimeDetails = new List<TaskTimeDetails>(),
             ProjectId = projectEntity.Id,
             UserId = userEntity.Id
         }, cancellationToken);

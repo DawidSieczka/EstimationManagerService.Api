@@ -15,6 +15,13 @@ public class UserTask
     [MaxLength(EntityConfigurationValues.DescriptionMaximumLength)]
     [MinLength(EntityConfigurationValues.DescriptionMinimumLength)]
     public string Description { get; set; }
+    
+    public DateTime? TaskStartDate { get; set; }
+    public DateTime? TaskEndDate { get; set; }
+    public TimeSpan? TaskEstimationTime { get; set; }
+    //TODO: At the moment of changing state the TaskCurrentTime should be updated
+    public bool IsStarted { get; set; }
+    public virtual List<TaskTimeDetails> TaskTimeDetails { get; set; }
     public virtual User User { get; set; }
     public int UserId { get; set; }
     public virtual Project Project { get; set; }

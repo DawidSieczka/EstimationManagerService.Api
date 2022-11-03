@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Operations\TaskTimeDetails\Commands\CreateTaskTimeDetails" />
+    <Folder Include="Operations\TaskTimeDetails\Commands\DeleteTaskTimeDetails" />
+    <Folder Include="Operations\TaskTimeDetails\Commands\UpdateTaskTimeDetails" />
+    <Folder Include="Operations\TaskTimeDetails\Queries\GetAllTaskTimeDetails" />
     <Folder Include="Operations\Users\Queries\" />
     <Folder Include="Operations\UserTasks\Commands\" />
   </ItemGroup>
